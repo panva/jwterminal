@@ -1,0 +1,23 @@
+{
+  "name": "jwterminal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@panva/jose": "^1.4.0",
+    "color-json": "^2.0.0",
+    "get-stdin": "^7.0.0",
+    "got": "^9.6.0",
+    "hard-rejection": "^2.1.0",
+    "openid-client": "^3.2.1",
+    "pad-stdio": "^2.0.0"
+  },
+  "bin": {
+    "jwt": "./verify.js"
+  }
+}
