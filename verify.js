@@ -80,4 +80,5 @@ Issuer[custom.http_options] = (options) => ({ ...options, timeout });
   }
 })().catch((err) => {
   console.log(`${err.name}: ${err.message}`);
+  process.exit(1);
 })

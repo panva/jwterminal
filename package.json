@@ -18,6 +18,7 @@
     "pad-stdio": "^2.0.0"
   },
   "bin": {
-    "jwt": "./verify.js"
+    "jwt": "./verify.js",
+    "jwe": "./decrypt.js"
   }
 }
