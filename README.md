@@ -1,56 +1,63 @@
 # 👨‍💻 👩‍💻
 
-```console
-npm i -g panva/jwterminal
+Install:
+
+```sh
+$ npm i -g panva/jwterminal
 ```
 
+Use:
+```sh
+$ pbpaste | jwt
+```
 
-```console
-❯ pbpaste | jwt
-
+Output:
+```json
 Header:
     {
-      "alg": "RS256",
+      "alg": "EdDSA",
       "typ": "JWT",
-      "kid": "r1LkbBo3925Rb2ZFFrKyU3MVex9T2817Kx0vbi6i_Kc"
+      "kid": "CLjPrbijCB2z9dScRNpM1mSGOQVOIByTmd18Ft2eiAQ"
     }
 
 Payload:
     {
+      "urn:oidc-provider:example:foo": "bar",
+      "jti": "cJaKmqLh8r3-FYS6QtiqH",
       "sub": "foo",
-      "nonce": "02049549ec3dc63524444f3c8ac3c5ba",
-      "at_hash": "-t6FCvkma2RvBWtjaLb4OA",
-      "aud": "2baH-UeLf_D0LcVJH3enB",
-      "exp": 1562830488,
-      "iat": 1562826888,
-      "iss": "https://op.panva.cz"
+      "iat": 1562828328,
+      "exp": 1562831928,
+      "scope": "openid profile email",
+      "iss": "https://op.panva.cz",
+      "aud": "mlrmOmnSy7XGzO_UVUNnO"
     }
 
 Signature:
     VALIDATED using
 
     JWK
-     {
+
+    {
       "use": "sig",
-      "kid": "r1LkbBo3925Rb2ZFFrKyU3MVex9T2817Kx0vbi6i_Kc",
-      "e": "AQAB",
-      "n": "xwQ72P9z9OYshiQ-ntDYaPnnfwG6u9JAdLMZ5o0dmjlcyrvwQRdoFIKPnO65Q8mh6F_LDSxjxa2Yzo_wdjhbPZLjfUJXgCzm54cClXzT5twzo7lzoAfaJlkTsoZc2HFWqmcri0BuzmTFLZx2Q7wYBm0pXHmQKF0V-C1O6NWfd4mfBhbM-I1tHYSpAMgarSm22WDMDx-WWI7TEzy2QhaBVaENW9BKaKkJklocAZCxk18WhR0fckIGiWiSM5FcU1PY2jfGsTmX505Ub7P5Dz75Ygqrutd5tFrcqyPAtPTFDk8X1InxkkUwpP3nFU5o50DGhwQolGYKPGtQ-ZtmbOfcWQ",
-      "kty": "RSA"
+      "kid": "CLjPrbijCB2z9dScRNpM1mSGOQVOIByTmd18Ft2eiAQ",
+      "kty": "OKP",
+      "crv": "Ed25519",
+      "x": "lDkysGJKRmJeUp8ncTyGraHPHHiIfdxSajxGm7Srla8"
     }
 
     PEM
-     -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxwQ72P9z9OYshiQ+ntDY
-    aPnnfwG6u9JAdLMZ5o0dmjlcyrvwQRdoFIKPnO65Q8mh6F/LDSxjxa2Yzo/wdjhb
-    PZLjfUJXgCzm54cClXzT5twzo7lzoAfaJlkTsoZc2HFWqmcri0BuzmTFLZx2Q7wY
-    Bm0pXHmQKF0V+C1O6NWfd4mfBhbM+I1tHYSpAMgarSm22WDMDx+WWI7TEzy2QhaB
-    VaENW9BKaKkJklocAZCxk18WhR0fckIGiWiSM5FcU1PY2jfGsTmX505Ub7P5Dz75
-    Ygqrutd5tFrcqyPAtPTFDk8X1InxkkUwpP3nFU5o50DGhwQolGYKPGtQ+ZtmbOfc
-    WQIDAQAB
+
+    -----BEGIN PUBLIC KEY-----
+    MCowBQYDK2VwAyEAlDkysGJKRmJeUp8ncTyGraHPHHiIfdxSajxGm7Srla8=
     -----END PUBLIC KEY-----
 
 
 JWT Claims:
     VALID
-
 ```
+
+## Resources
+
+- https://github.com/panva/jose for JOSE
+- https://github.com/panva/node-openid-client for the compliant issuer discovery
+- https://github.com/sindresorhus for all the amazing packages we can all rely on ❤️
