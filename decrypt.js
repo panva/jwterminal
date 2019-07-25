@@ -9,7 +9,7 @@ const getStdin = require('get-stdin');
 const hardRejection = require('hard-rejection');
 
 (async () => {
-  const token = (await getStdin()).trim();
+  const token = (await getStdin()).trim().replace(/\s/g, '');
   const keystore = JWKS.asKeyStore(JSON.parse(await readFile(process.argv[2])));
   console.log(JWE.decrypt(token, keystore).toString());
 })().catch((err) => {

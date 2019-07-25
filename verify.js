@@ -15,7 +15,7 @@ const timeout = 5000;
 Issuer[custom.http_options] = (options) => ({ ...options, timeout });
 
 (async () => {
-  const token = (await getStdin()).trim();
+  const token = (await getStdin()).trim().replace(/\s/g, '');
   const { header, payload, signature } = JWT.decode(token, { complete: true });
 
   console.log('\nHeader:');
