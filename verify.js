@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { createPublicKey } = require('crypto');
+const { URL } = require('url');
 
 const { JWT, JWS, JWKS, JWK } = require('@panva/jose');
 const getStdin = require('get-stdin');
@@ -13,6 +14,15 @@ const got = require('got');
 const timeout = 5000;
 
 Issuer[custom.http_options] = (options) => ({ ...options, timeout });
+
+const isUrl = (val) => {
+  try {
+    const { protocol } = new URL(val);
+    return ['http:', 'https:'].includes(protocol);
+  } catch (err) {
+    return false;
+  }
+}
 
 (async () => {
   const token = (await getStdin()).trim().replace(/\s/g, '');
@@ -45,7 +55,7 @@ Issuer[custom.http_options] = (options) => ({ ...options, timeout });
     const i = certs.toString().indexOf('-----END CERTIFICATE-----');
     const cert = certs.slice(0, i + 25).toString('ascii').trim();
     keyOrStore = JWK.asKey(cert);
-  } else if (typeof header.alg === 'string' && header.alg !== 'none' && !header.alg.startsWith('HS') && typeof payload.iss === 'string' && payload.iss) { // (Issuer) Claim
+  } else if (typeof header.alg === 'string' && header.alg !== 'none' && !header.alg.startsWith('HS') && isUrl(payload.iss)) { // (Issuer) Claim
     // when asymmetric alg is used, discover the Authorization Server (either OIDC discovery or RFC8414)
     // get the jwks_uri and retrieve the keystore
     const issuer = await Issuer.discover(payload.iss);
