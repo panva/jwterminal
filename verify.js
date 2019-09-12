@@ -1,11 +1,9 @@
-#!/usr/bin/env node
-
+const assert = require('assert');
 const { createPublicKey } = require('crypto');
 const { URL } = require('url');
 
 const { JWT, JWS, JWKS, JWK } = require('@panva/jose');
 const getStdin = require('get-stdin');
-const hardRejection = require('hard-rejection');
 const pad = require('pad-stdio');
 const cj = require('color-json');
 const { Issuer, custom } = require('openid-client');
@@ -24,8 +22,12 @@ const isUrl = (val) => {
   }
 }
 
-(async () => {
-  const token = (await getStdin()).trim().replace(/\s/g, '');
+module.exports = async function verify(token = '[DEFAULT FROM STDIN]') {
+  if (!token || token === '[DEFAULT FROM STDIN]') {
+    token = (await getStdin()).trim().replace(/\s/g, '');
+    assert(token, 'token must be passed in stdin or as a parameter');
+  }
+
   const { header, payload, signature } = JWT.decode(token, { complete: true });
 
   console.log('\nHeader:');
@@ -88,7 +90,6 @@ const isUrl = (val) => {
       console.log(err.message);
     }
   }
-})().catch((err) => {
-  console.log(`${err.name}: ${err.message}`);
-  process.exit(1);
-})
+
+  return '';
+}

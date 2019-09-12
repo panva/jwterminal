@@ -9,16 +9,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@panva/jose": "^1.4.0",
+    "@panva/jose": "^1.9.1",
     "color-json": "^2.0.0",
     "get-stdin": "^7.0.0",
     "got": "^9.6.0",
-    "hard-rejection": "^2.1.0",
-    "openid-client": "^3.2.1",
+    "js-fire": "^0.4.0",
+    "openid-client": "^3.7.1",
     "pad-stdio": "^2.0.0"
   },
   "bin": {
-    "jwt": "./verify.js",
-    "jwe": "./decrypt.js"
+    "jwterminal": "./cli.js"
   }
 }

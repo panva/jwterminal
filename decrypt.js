@@ -1,18 +1,19 @@
-#!/usr/bin/env node
-
+const assert = require('assert');
 const fs = require('fs');
 const { promisify } = require('util');
-const readFile = promisify(fs.readFile);
 
 const { JWE, JWKS } = require('@panva/jose');
 const getStdin = require('get-stdin');
-const hardRejection = require('hard-rejection');
 
-(async () => {
-  const token = (await getStdin()).trim().replace(/\s/g, '');
-  const keystore = JWKS.asKeyStore(JSON.parse(await readFile(process.argv[2])));
-  console.log(JWE.decrypt(token, keystore).toString());
-})().catch((err) => {
-  console.log(`${err.name}: ${err.message}`);
-  process.exit(1);
-})
+const readFile = promisify(fs.readFile);
+
+module.exports = async function decrypt(keystore, token = '[DEFAULT FROM STDIN]') {
+  if (!token || token === '[DEFAULT FROM STDIN]') {
+    token = (await getStdin()).trim().replace(/\s/g, '');
+    assert(token, 'token must be passed in stdin or as a parameter');
+  }
+
+  const keys = JWKS.asKeyStore(JSON.parse(await readFile(keystore)));
+
+  return JWE.decrypt(token, keys).toString();
+}
