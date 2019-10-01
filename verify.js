@@ -2,7 +2,7 @@ const assert = require('assert');
 const { createPublicKey } = require('crypto');
 const { URL } = require('url');
 
-const { JWT, JWS, JWKS, JWK } = require('@panva/jose');
+const { JWT, JWS, JWKS, JWK } = require('jose');
 const getStdin = require('get-stdin');
 const pad = require('pad-stdio');
 const cj = require('color-json');
@@ -62,7 +62,7 @@ module.exports = async function verify(token = '[DEFAULT FROM STDIN]') {
     // get the jwks_uri and retrieve the keystore
     const issuer = await Issuer.discover(payload.iss);
     issuer[custom.http_options] = (options) => ({ ...options, timeout });
-    // @panva/jose versions may be out of sync between root dep and openid-client so just re-wrap here
+    // jose versions may be out of sync between root dep and openid-client so just re-wrap here
     keyOrStore = JWKS.asKeyStore((await issuer.keystore()).toJWKS())
   }
 

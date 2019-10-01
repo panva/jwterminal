@@ -2,7 +2,7 @@ const assert = require('assert');
 const fs = require('fs');
 const { promisify } = require('util');
 
-const { JWE, JWKS } = require('@panva/jose');
+const { JWE, JWKS } = require('jose');
 const getStdin = require('get-stdin');
 
 const readFile = promisify(fs.readFile);
