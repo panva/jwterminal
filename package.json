@@ -2,22 +2,22 @@
   "name": "jwterminal",
   "version": "1.0.0",
   "description": "",
+  "license": "MIT",
+  "author": "",
   "main": "index.js",
+  "bin": {
+    "jwterminal": "./cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "color-json": "^2.0.0",
     "get-stdin": "^7.0.0",
     "got": "^9.6.0",
     "jose": "^1.10.0",
-    "js-fire": "^0.4.0",
+    "js-fire": "^0.7.0",
     "openid-client": "^3.7.3",
     "pad-stdio": "^2.0.0"
-  },
-  "bin": {
-    "jwterminal": "./cli.js"
   }
 }

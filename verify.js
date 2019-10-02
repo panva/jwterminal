@@ -22,8 +22,8 @@ const isUrl = (val) => {
   }
 }
 
-module.exports = async function verify(token = '[DEFAULT FROM STDIN]') {
-  if (!token || token === '[DEFAULT FROM STDIN]') {
+module.exports = async function verify(token) {
+  if (!token) {
     token = (await getStdin()).trim().replace(/\s/g, '');
     assert(token, 'token must be passed in stdin or as a parameter');
   }

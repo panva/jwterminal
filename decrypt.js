@@ -7,8 +7,8 @@ const getStdin = require('get-stdin');
 
 const readFile = promisify(fs.readFile);
 
-module.exports = async function decrypt(keystore, token = '[DEFAULT FROM STDIN]') {
-  if (!token || token === '[DEFAULT FROM STDIN]') {
+module.exports = async function decrypt(keystore, token) {
+  if (!token) {
     token = (await getStdin()).trim().replace(/\s/g, '');
     assert(token, 'token must be passed in stdin or as a parameter');
   }
