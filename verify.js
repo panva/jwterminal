@@ -42,7 +42,7 @@ module.exports = async function verify(token) {
   let keyOrStore;
   if (header.jku) { // (JWK Set URL) Header Parameter
     // fetch, parse as json, body => import as JWKS
-    keyOrStore = JWKS.asKeyStore((await got.get(header.jku, { timeout, json: true })).body);
+    keyOrStore = JWKS.asKeyStore((await got.get(header.jku, { timeout, responseType: 'json' })).body);
   } else if (header.jwk && header.jwk.kty) { // (JSON Web Key) Header Parameter
     // import as JWK
     keyOrStore = JWK.asKey(header.jwk);
